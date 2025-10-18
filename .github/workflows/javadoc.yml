@@ -26,6 +26,11 @@ jobs:
           run-id: "${{ steps.fetch_run_id.outputs.run_id }}"
           github-token: "${{ secrets.ARTIFACT_DOWNLOAD_TOKEN }}"
 
+      - name: Check downloaded artifacts
+        run: |
+          echo "Files in workspace:"
+          ls -la
+
       - name: Extract Javadoc Jars
         run: |
           # extract jars
