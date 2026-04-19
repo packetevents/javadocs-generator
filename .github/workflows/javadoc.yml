@@ -19,7 +19,7 @@ jobs:
         run: |
           echo -n 'run_id=' >> "$GITHUB_OUTPUT" && curl -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/${TARGET_REPOSITORY}/actions/runs?exclude_pull_requests=true&branch=$(node -p 'encodeURIComponent(process.env.TARGET_BRANCH_NAME)')&per_page=1&event=push" | jq .workflow_runs[0].id >> "$GITHUB_OUTPUT"
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           merge-multiple: true
           repository: "${{ env.TARGET_REPOSITORY }}"
@@ -44,7 +44,7 @@ jobs:
         run: mv api/* ./ && rmdir api
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./
 
@@ -62,4 +62,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
