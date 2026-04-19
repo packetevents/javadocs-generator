@@ -17,7 +17,7 @@ jobs:
       - name: Fetch latest workflow run id
         id: fetch_run_id
         run: |
-          echo -n 'run_id=' >> "$GITHUB_OUTPUT" && curl -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/${TARGET_REPOSITORY}/actions/runs?exclude_pull_requests=true&branch=$(node -p 'encodeURIComponent(process.env.TARGET_BRANCH_NAME)')&per_page=1" | jq .workflow_runs[0].id >> "$GITHUB_OUTPUT"
+          echo -n 'run_id=' >> "$GITHUB_OUTPUT" && curl -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/${TARGET_REPOSITORY}/actions/runs?exclude_pull_requests=true&branch=$(node -p 'encodeURIComponent(process.env.TARGET_BRANCH_NAME)')&per_page=1&event=push" | jq .workflow_runs[0].id >> "$GITHUB_OUTPUT"
 
       - uses: actions/download-artifact@v4
         with:
